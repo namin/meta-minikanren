@@ -1,0 +1,28 @@
+{% extends "base_livecode.html" %}
+
+{% block title %}miniKanren in miniKanren{% endblock %}
+
+{% block content %}
+<div class="live" id="play">
+(run 1 (q)
+     (eval-mko
+       `((begin
+           (define (appendo l s out)
+             (disj
+               (conj
+                 (== l '())
+                 (== s out))
+               (fresh a
+                 (fresh d
+                   (fresh res
+                     (conj
+                       (conj
+                         (== (cons a d) l)
+                         (== (cons a res) out))
+                       (appendo d s res)))))))
+           )
+         (run 1 (q) (appendo (cons 'a (cons 'b '())) (cons 'c '()) q)))
+       q))
+</div>
+
+{% endblock %}
