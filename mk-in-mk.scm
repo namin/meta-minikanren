@@ -220,7 +220,7 @@
   (conde
     [(fresh (exp env genv parent)
        (== `(bind-context (goal-k ,exp ,env ,genv) ,parent) context)
-       (step-searcho `(mplus (inc-k ,exp ,env ,genv ,ctr ,subst) ,remaining-tree) parent out))]
+       (step-searcho `(mplus (inc-k ,exp ,env ,genv ,ctr ,subst) (bind ,remaining-tree (goal-k ,exp ,env ,genv))) parent out))]
     [(fresh (right parent)
        (== `(mplus-context ,right ,parent) context)
        (success-ko ctr subst `(mplus ,right ,remaining-tree) parent out))]
